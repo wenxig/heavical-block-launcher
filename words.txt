@@ -1,0 +1,10 @@
+asar
+heavical
+jsnext
+lightningcss
+nsis
+oxfmt
+oxlint
+releaserc
+tsgolint
+wenxig

@@ -1,0 +1,48 @@
+{
+  "name": "heavical-block-launcher",
+  "version": "1.0.0",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "format": "bun --bun oxfmt",
+    "lint": "bun --bun oxlint --type-aware",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "typecheck:web": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "build": "bun run typecheck && electron-vite build",
+    "postinstall": "electron-builder install-app-deps",
+    "build:win": "bun run build && electron-builder --win --config",
+    "build:mac": "bun run build && electron-builder --mac --config",
+    "build:linux": "bun run build && electron-builder --linux --config"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "^3.0.2",
+    "@electron-toolkit/utils": "^4.0.0",
+    "electron-updater": "^6.8.3"
+  },
+  "devDependencies": {
+    "@electron-toolkit/tsconfig": "^2.0.0",
+    "@electron/notarize": "^3.1.1",
+    "@tailwindcss/vite": "^4.2.1",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "@vitejs/plugin-vue-jsx": "^5.1.5",
+    "electron": "^41.0.2",
+    "electron-builder": "^26.8.2",
+    "electron-vite": "5.0.0",
+    "lightningcss": "^1.32.0",
+    "naive-ui": "^2.44.1",
+    "pinia": "^3.0.4",
+    "tailwindcss": "^4.2.1",
+    "unplugin-vue-components": "^31.0.0",
+    "vite": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "^5.0.3",
+    "vue-tsc": "^3.2.5"
+  },
+  "trustedDependencies": [
+    "electron",
+    "*"
+  ]
+}
