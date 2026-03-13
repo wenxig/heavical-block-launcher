@@ -21,13 +21,12 @@
     "noImplicitOverride": true,
     "noImplicitThis": true,
     "jsxImportSource": "vue",
-    "types": ["./env.d.ts"],
     "verbatimModuleSyntax": true
   },
   "files": [],
   "references": [
     { "path": "./tsconfig.ci.json" },
-    // { "path": "./packages/electron-vite/tsconfig.json" },
+    { "path": "./packages/remote/tsconfig.json" },
     { "path": "./packages/app/tsconfig.json" }
   ]
 }

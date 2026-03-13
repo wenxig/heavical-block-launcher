@@ -1,7 +1,3 @@
 {
-  "name": "ipc-call",
-  "trustedDependencies": [
-    "electron",
-    "*"
-  ]
+  "name": "ipc-call"
 }

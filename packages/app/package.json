@@ -3,18 +3,18 @@
   "version": "1.0.0",
   "main": "./out/main/index.js",
   "scripts": {
-    "format": "bun --bun oxfmt",
-    "lint": "bun --bun oxlint --type-aware",
+    "format": "pnpm exec oxfmt",
+    "lint": "pnpm exec oxlint --type-aware",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
-    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "typecheck": "pnpm run typecheck:node && pnpm run typecheck:web",
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
-    "build": "bun run typecheck && electron-vite build",
+    "build": "pnpm typecheck && electron-vite build",
     "postinstall": "electron-builder install-app-deps",
-    "build:win": "bun run build && electron-builder --win --config",
-    "build:mac": "bun run build && electron-builder --mac --config",
-    "build:linux": "bun run build && electron-builder --linux --config"
+    "build:win": "pnpm build && electron-builder --win --config",
+    "build:mac": "pnpm build && electron-builder --mac --config",
+    "build:linux": "pnpm build && electron-builder --linux --config"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.2",
@@ -40,9 +40,5 @@
     "vue": "catalog:",
     "vue-router": "^5.0.3",
     "vue-tsc": "^3.2.5"
-  },
-  "trustedDependencies": [
-    "electron",
-    "*"
-  ]
+  }
 }
