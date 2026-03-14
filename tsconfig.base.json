@@ -26,7 +26,8 @@
   "files": [],
   "references": [
     { "path": "./tsconfig.ci.json" },
-    { "path": "./packages/remote/tsconfig.json" },
+    { "path": "./packages/ipc-call/tsconfig.json" },
+    { "path": "./packages/window-manager/tsconfig.json" },
     { "path": "./packages/app/tsconfig.json" }
   ]
 }

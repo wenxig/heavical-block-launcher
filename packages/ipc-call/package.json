@@ -1,0 +1,48 @@
+{
+  "name": "ipc-call",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsdown -c ./tsdown.config.ts"
+  },
+  "type": "module",
+  "exports": {
+    "./main": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs",
+      "types": "./dist/main.d.ts"
+    },
+    "./preload": {
+      "import": "./dist/preload.js",
+      "require": "./dist/preload.cjs",
+      "types": "./dist/preload.d.ts"
+    },
+    "./renderer": {
+      "import": "./dist/renderer.js",
+      "require": "./dist/renderer.cjs",
+      "types": "./dist/renderer.d.ts"
+    }
+  },
+  "dependencies": {
+    "@vueuse/core": "catalog:",
+    "es-toolkit": "catalog:",
+    "mitt": "catalog:",
+    "vue": "catalog:",
+    "window-manager": "workspace:*"
+  },
+  "devDependencies": {
+    "@electron-toolkit/tsconfig": "^2.0.0",
+    "@typescript/native-preview": "catalog:",
+    "electron-vite": "catalog:",
+    "tsdown": "catalog:"
+  },
+  "peerDependencies": {
+    "electron": "catalog:",
+    "window-manager": "workspace:*"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "electron",
+      "electron-builder"
+    ]
+  }
+}

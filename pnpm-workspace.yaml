@@ -2,7 +2,14 @@ packages:
   - packages/*
 
 catalog:
-  "@typescript/native-preview": ^7.0.0-dev.20260313.1
+  '@electron-toolkit/tsconfig': ^2.0.0
+  '@types/node': ^25.5.0
+  '@typescript/native-preview': 7.0.0-dev.20260314.1
+  '@vueuse/core': ^14.2.1
+  electron: ^41.0.2
+  electron-vite: ^5.0.0
+  es-toolkit: ^1.45.1
+  mitt: ^3.0.1
+  tsdown: ^0.21.2
   vite: ^8.0.0
   vue: ^3.5.30
-  "@types/node": ^25.5.0
