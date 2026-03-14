@@ -5,7 +5,7 @@ import { isObject } from 'es-toolkit/compat'
 import mitt from 'mitt'
 import { WindowManager } from 'window-manager'
 
-import type { SharedValueType, InjectFunctionType, InjectFunctionResult } from '../type'
+import type { InjectFunctionResult } from '../type'
 
 export class RefValue<T> {
   constructor(protected _value: T) {}
@@ -33,15 +33,19 @@ export class RefValue<T> {
   }
 }
 
-const sharedValueLocal = mitt<{ changed: [name: string | number, value: SharedValue<any>] }>()
+const sharedValueLocal = mitt<{ changed: [name: string | number, value: SharedValue<any, any>] }>()
 export class SharedValue<
-  T extends keyof SharedValueType,
-  VT extends SharedValueType[T] = SharedValueType[T]
+  TGlobal extends Record<string, any>,
+  T extends keyof TGlobal,
+  VT extends TGlobal[T] = TGlobal[T]
 > extends RefValue<VT> {
   public destroy: () => void
+  private get name() {
+    return this.name_.toString()
+  }
   constructor(
-    public readonly name: T,
-    _value: SharedValueType[T]
+    public readonly name_: T,
+    _value: TGlobal[T]
   ) {
     super(<VT>_value)
     const handleValueChange = (_e: any, value: VT) => {
@@ -50,14 +54,17 @@ export class SharedValue<
       this._value = value
       this.mitt.emit('watch', this._value)
     }
-    const channel = `_sync_value_${name}_`
+    const channel = `_sync_value_${this.name}_`
     ipcMain.handle(channel, handleValueChange)
 
     const handleValueBoot = (e: IpcMainEvent) => (e.returnValue = this._value)
     const bootChannel = `${channel}boot_`
     ipcMain.addListener(bootChannel, handleValueBoot)
 
-    const handleLocalSync = ([name, value]: [name: string | number, value: SharedValue<any>]) => {
+    const handleLocalSync = ([name, value]: [
+      name: string | number,
+      value: SharedValue<any, any>
+    ]) => {
       if (name != this.name || value == this) return
       console.debug('[SharedValue]', name, 'handleLocalSync')
       this._value = value.value
@@ -82,16 +89,20 @@ export class SharedValue<
   }
 }
 export class InjectFunction<
-  T extends keyof InjectFunctionType,
-  FT extends AnyFn = InjectFunctionType[T]
+  TGlobal extends Record<string, AnyFn>,
+  T extends keyof TGlobal,
+  FT extends AnyFn = TGlobal[T]
 > {
   public destroy: () => void
+  private get name() {
+    return this.name_.toString()
+  }
   constructor(
-    public readonly name: T,
+    public readonly name_: T,
     protected fun: FT,
     _this: any = {}
   ) {
-    const channel = `_call_function_${name}_`
+    const channel = `_call_function_${this.name}_`
     const handleCallFunction = async (
       _e: IpcMainInvokeEvent,
       p: Parameters<FT>
@@ -106,7 +117,7 @@ export class InjectFunction<
     }
     ipcMain.handle(channel, handleCallFunction)
 
-    const channelSync = `_call_function_sync_${name}_`
+    const channelSync = `_call_function_sync_${this.name}_`
     const handleCallFunctionSync = async (
       e: IpcMainEvent,
       p: Parameters<FT>
@@ -127,16 +138,20 @@ export class InjectFunction<
     }
   }
   public static from<
-    T extends keyof InjectFunctionType,
-    FT extends InjectFunctionType[T] = InjectFunctionType[T]
+    TGlobal extends Record<string, any>,
+    T extends keyof TGlobal,
+    FT extends TGlobal[T] = TGlobal[T]
   >(name: T, fun: FT, _this?: any) {
-    new InjectFunction(name, fun, _this)
+    new InjectFunction(name.toString(), fun, _this)
     return fun
   }
-  public static inject<K extends keyof InjectFunctionType>(name: K, _this: any) {
-    return function <T extends string>(c: Record<T, InjectFunctionType[K]>, key: T) {
+  public static inject<TGlobal extends Record<string, any>, K extends keyof TGlobal>(
+    name: K,
+    _this: any
+  ) {
+    return function <T extends string>(c: Record<T, TGlobal[K]>, key: T) {
       console.debug('[InjectFunction]this:', Object.keys(c), c[key])
-      InjectFunction.from(name, c[key].bind(_this) as InjectFunctionType[K], _this)
+      InjectFunction.from(name.toString(), c[key].bind(_this) as TGlobal[K], _this)
     }
   }
 }

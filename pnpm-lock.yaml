@@ -12,9 +12,6 @@ catalogs:
     '@types/node':
       specifier: ^25.5.0
       version: 25.5.0
-    '@typescript/native-preview':
-      specifier: 7.0.0-dev.20260314.1
-      version: 7.0.0-dev.20260314.1
     '@vueuse/core':
       specifier: ^14.2.1
       version: 14.2.1
@@ -33,12 +30,12 @@ catalogs:
     tsdown:
       specifier: ^0.21.2
       version: 0.21.2
-    vite:
-      specifier: ^8.0.0
-      version: 8.0.0
     vue:
       specifier: ^3.5.30
       version: 3.5.30
+
+overrides:
+  vite: ^8.0.0
 
 importers:
 
@@ -104,6 +101,12 @@ importers:
       electron-updater:
         specifier: ^6.8.3
         version: 6.8.3
+      ipc-call:
+        specifier: workspace:*
+        version: link:../ipc-call
+      window-manager:
+        specifier: workspace:*
+        version: link:../window-manager
     devDependencies:
       '@electron-toolkit/tsconfig':
         specifier: 'catalog:'
@@ -114,9 +117,6 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.2.1
         version: 4.2.1(vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1)(yaml@2.8.2))
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.5.0
       '@vitejs/plugin-vue':
         specifier: ^6.0.5
         version: 6.0.5(vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1)(yaml@2.8.2))(vue@3.5.30(typescript@5.9.3))
@@ -148,7 +148,7 @@ importers:
         specifier: ^31.0.0
         version: 31.0.0(vue@3.5.30(typescript@5.9.3))
       vite:
-        specifier: 'catalog:'
+        specifier: ^8.0.0
         version: 8.0.0(@types/node@25.5.0)(jiti@2.6.1)(yaml@2.8.2)
       vue:
         specifier: 'catalog:'
@@ -184,9 +184,6 @@ importers:
       '@electron-toolkit/tsconfig':
         specifier: ^2.0.0
         version: 2.0.0(@types/node@25.5.0)
-      '@typescript/native-preview':
-        specifier: 'catalog:'
-        version: 7.0.0-dev.20260314.1
       electron-vite:
         specifier: 'catalog:'
         version: 5.0.0(vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1)(yaml@2.8.2))
@@ -212,9 +209,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 25.5.0
-      '@typescript/native-preview':
-        specifier: 'catalog:'
-        version: 7.0.0-dev.20260314.1
       tsdown:
         specifier: 'catalog:'
         version: 0.21.2(@typescript/native-preview@7.0.0-dev.20260314.1)(typescript@5.9.3)(vue-tsc@3.2.5(typescript@5.9.3))
@@ -1594,7 +1588,7 @@ packages:
   '@tailwindcss/vite@4.2.1':
     resolution: {integrity: sha512-TBf2sJjYeb28jD2U/OhwdW0bbOsxkWPwQ7SrqGf9sVcoYwZj7rkXljroBO9wKBut9XnmQLXanuDUeqQK0lGg/w==}
     peerDependencies:
-      vite: ^5.2.0 || ^6 || ^7
+      vite: ^8.0.0
 
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
@@ -1696,14 +1690,14 @@ packages:
     resolution: {integrity: sha512-jIAsvHOEtWpslLOI2MeElGFxH7M8pM83BU/Tor4RLyiwH0FM4nUW3xdvbw20EeU9wc5IspQwMq225K3CMnJEpA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
-      vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+      vite: ^8.0.0
       vue: ^3.0.0
 
   '@vitejs/plugin-vue@6.0.5':
     resolution: {integrity: sha512-bL3AxKuQySfk1iGcBsQnoRVexTPJq0Z/ixFVM8OhVJAP6ZXXXLtM7NFKWhLl30Kg7uTBqIaPXbh+nuQCuBDedg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
-      vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+      vite: ^8.0.0
       vue: ^3.2.25
 
   '@volar/language-core@2.4.28':
@@ -2439,7 +2433,7 @@ packages:
     hasBin: true
     peerDependencies:
       '@swc/core': ^1.0.0
-      vite: ^5.0.0 || ^6.0.0 || ^7.0.0
+      vite: ^8.0.0
     peerDependenciesMeta:
       '@swc/core':
         optional: true
@@ -6114,6 +6108,7 @@ snapshots:
       '@typescript/native-preview-linux-x64': 7.0.0-dev.20260314.1
       '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260314.1
       '@typescript/native-preview-win32-x64': 7.0.0-dev.20260314.1
+    optional: true
 
   '@vitejs/plugin-vue-jsx@5.1.5(vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1)(yaml@2.8.2))(vue@3.5.30(typescript@5.9.3))':
     dependencies:

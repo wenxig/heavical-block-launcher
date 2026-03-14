@@ -7,19 +7,16 @@
   "type": "module",
   "exports": {
     "./main": {
-      "import": "./dist/main.js",
-      "require": "./dist/main.cjs",
-      "types": "./dist/main.d.ts"
+      "import": "./dist/main/index.mjs",
+      "types": "./dist/main/index.d.mts"
     },
     "./preload": {
-      "import": "./dist/preload.js",
-      "require": "./dist/preload.cjs",
-      "types": "./dist/preload.d.ts"
+      "import": "./dist/preload/index.mjs",
+      "types": "./dist/preload/index.d.mts"
     },
     "./renderer": {
-      "import": "./dist/renderer.js",
-      "require": "./dist/renderer.cjs",
-      "types": "./dist/renderer.d.ts"
+      "import": "./dist/renderer/index.mjs",
+      "types": "./dist/renderer/index.d.mts"
     }
   },
   "dependencies": {
@@ -31,18 +28,11 @@
   },
   "devDependencies": {
     "@electron-toolkit/tsconfig": "^2.0.0",
-    "@typescript/native-preview": "catalog:",
     "electron-vite": "catalog:",
     "tsdown": "catalog:"
   },
   "peerDependencies": {
     "electron": "catalog:",
     "window-manager": "workspace:*"
-  },
-  "pnpm": {
-    "ignoredBuiltDependencies": [
-      "electron",
-      "electron-builder"
-    ]
   }
 }

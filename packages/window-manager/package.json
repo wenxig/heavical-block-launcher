@@ -4,9 +4,19 @@
   "scripts": {
     "build": "tsdown -c ./tsdown.config.ts"
   },
-  "main": "./dist/index.mjs",
   "type": "module",
-  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./preload": {
+      "types": "./dist/preload.d.mts",
+      "import": "./dist/preload.mjs",
+      "require": "./dist/preload.cjs"
+    }
+  },
   "dependencies": {
     "@electron-toolkit/utils": "^4.0.0",
     "@vueuse/core": "catalog:",
@@ -14,15 +24,9 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "@typescript/native-preview": "catalog:",
     "tsdown": "catalog:"
   },
   "peerDependencies": {
     "electron": "catalog:"
-  },
-  "pnpm": {
-    "ignoredBuiltDependencies": [
-      "electron"
-    ]
   }
 }

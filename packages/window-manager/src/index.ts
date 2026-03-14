@@ -2,32 +2,10 @@ import path from 'node:path'
 
 import { is } from '@electron-toolkit/utils'
 import type { AnyFn } from '@vueuse/core'
-import { BrowserWindow, ipcRenderer, shell, type BrowserWindowConstructorOptions } from 'electron'
+import { BrowserWindow, shell, type BrowserWindowConstructorOptions } from 'electron'
 import { isFunction, merge } from 'es-toolkit'
 
-export interface GlobalEvents extends Record<string, any[]> {}
-export interface Inject {
-  event<T extends keyof GlobalEvents>(
-    event: T,
-    callback: (...p: GlobalEvents[T]) => void
-  ): () => void
-}
-declare global {
-  interface Window {
-    inject: Inject
-  }
-}
-
 export namespace WindowManager {
-  export const init = () =>
-    ({
-      event: (e, cb) => {
-        const handle = (_: any, ...args: Parameters<typeof cb>) => cb(...args)
-        ipcRenderer.on(e.toString(), handle)
-        return () => ipcRenderer.off(e.toString(), handle)
-      }
-    }) as Inject
-
   export const windows = new Map<string, BrowserWindow>()
   export const add = (key: string, win: BrowserWindow) => {
     windows.set(key, win)

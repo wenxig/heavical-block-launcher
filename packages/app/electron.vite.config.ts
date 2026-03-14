@@ -9,9 +9,9 @@ import Components from 'unplugin-vue-components/vite'
 import VueRouter from 'vue-router/vite'
 
 export default defineConfig({
-  main: { resolve: { alias: { '@': fileURLToPath(new URL('src/main/src', import.meta.url)) } } },
+  main: { resolve: { alias: { '@m': fileURLToPath(new URL('src/main', import.meta.url)) } } },
   preload: {
-    resolve: { alias: { '@': fileURLToPath(new URL('src/preload/src', import.meta.url)) } }
+    resolve: { alias: { '@p': fileURLToPath(new URL('src/preload', import.meta.url)) } }
   },
   renderer: {
     plugins: [

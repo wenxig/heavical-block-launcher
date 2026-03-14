@@ -1,15 +1,13 @@
-import type { AnyFn } from '@vueuse/core'
-
 declare module 'window-manager' {
   interface Inject {
     sharedValue: {
-      sync(name: keyof SharedValueType, v: any): void
-      boot<T>(name: keyof SharedValueType): T
-      watch<T>(name: keyof SharedValueType, cb: (v: T) => void): () => void
+      sync(name: string, v: any): void
+      boot<T>(name: string): T
+      watch<T>(name: string, cb: (v: T) => void): () => void
     }
     injectFunction: {
-      sync(name: keyof InjectFunctionType, ...v: any[]): InjectFunctionResult<Awaited<any>>
-      call(name: keyof InjectFunctionType, ...v: any[]): Promise<InjectFunctionResult<any>>
+      sync(name: string, ...v: any[]): InjectFunctionResult<Awaited<any>>
+      call(name: string, ...v: any[]): Promise<InjectFunctionResult<any>>
     }
   }
 }
@@ -17,6 +15,3 @@ declare module 'window-manager' {
 export type InjectFunctionResult<T> =
   | { isError: false; result: T }
   | { isError: true; result: unknown }
-
-export interface SharedValueType extends Record<string, any> {}
-export interface InjectFunctionType extends Record<string, AnyFn> {}
