@@ -33,5 +33,9 @@
     "overrides": {
       "vite": "catalog:"
     }
+  },
+  "dependencies": {
+    "@vueuse/core": "catalog:",
+    "pinia": "^3.0.4"
   }
 }

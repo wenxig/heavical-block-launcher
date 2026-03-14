@@ -1,17 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Electron</title>
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <title>Heavical Block Launcher</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+      content="default-src * chrome-extension: blob: tauri: local: ipc: ws: wss: 'unsafe-inline' 'unsafe-eval' data: chrome-extension: blob: tauri:; script-src * chrome-extension: blob: tauri: local: ipc: ws: wss: 'unsafe-inline' 'unsafe-eval'; connect-src * chrome-extension: blob: tauri: local: ipc: ws: wss: 'unsafe-inline'; img-src * chrome-extension: blob: tauri: local: ipc: ws: wss: data: chrome-extension: blob: tauri:; frame-src * chrome-extension: blob: tauri: local: ipc: ws: wss:; style-src * chrome-extension: blob: tauri: local: ipc: ws: wss: 'unsafe-inline';"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
   </head>
 
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+  <body class="static size-full">
+    <div id="app" class="static size-full overflow-hidden **:select-none"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
