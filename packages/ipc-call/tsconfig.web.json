@@ -1,12 +1,5 @@
 {
-  "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
-  "include": [
-    "src/renderer/*.ts",
-    "src/type.ts"
-  ],
-  "compilerOptions": {
-    "composite": true,
-    "declaration": true,
-    "baseUrl": "."
-  }
+  "extends": ["@electron-toolkit/tsconfig/tsconfig.web.json", "./tsconfig.json"],
+  "include": ["src/renderer/*.ts", "src/type.ts"],
+  "compilerOptions": { "composite": true, "declaration": true, "baseUrl": "." }
 }
