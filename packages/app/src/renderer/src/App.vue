@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Versions from './components/Versions.vue'
-
 </script>
 
 <template>
@@ -92,7 +91,3 @@ import Versions from './components/Versions.vue'
     </div>
   </div>
 </template>
-
-<style lang="less">
-@import './assets/css/styles.less';
-</style>

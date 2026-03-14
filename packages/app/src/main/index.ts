@@ -11,14 +11,11 @@ declare global {
   }
 }
 
-import { app, session } from 'electron'
+import { app } from 'electron'
 import { WindowManager } from 'window-manager'
 
 import { createInitAppDefault } from './helper/app'
 const initApp = createInitAppDefault()
-
-import path from 'node:path'
-session.defaultSession.loadExtension(path.join(import.meta.dirname, '../../resources/vue-devtools'))
 
 const createMainWindow = () => WindowManager.create('main')
 
