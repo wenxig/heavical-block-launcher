@@ -2,6 +2,7 @@
   "name": "heavical-block-launcher",
   "version": "1.0.0",
   "main": "./out/main/index.js",
+  "type": "module",
   "scripts": {
     "format": "pnpm exec oxfmt",
     "lint": "pnpm exec oxlint --type-aware",

@@ -45,7 +45,7 @@ export namespace WindowManager {
     title: '',
     center: true,
     webPreferences: {
-      preload: path.join(__dirname, '../preload/index.mjs'),
+      preload: path.join(import.meta.dirname, '../preload/index.mjs'),
       sandbox: false,
       spellcheck: false
     },
@@ -82,7 +82,7 @@ export namespace WindowManager {
     if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
       win.loadURL(`${process.env['ELECTRON_RENDERER_URL']}${_path}`)
     } else {
-      win.loadFile(`${path.join(__dirname, '../renderer/index.html')}${_path}`)
+      win.loadFile(`${path.join(import.meta.dirname, '../renderer/index.html')}${_path}`)
     }
     add(name, win)
     return win
