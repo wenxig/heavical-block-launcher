@@ -1,5 +1,5 @@
 {
-  "name": "heavical-block-launcher",
+  "name": "app",
   "version": "1.0.0",
   "main": "./out/main/index.js",
   "type": "module",
@@ -9,22 +9,26 @@
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
     "typecheck": "pnpm run typecheck:node && pnpm run typecheck:web",
-    "start": "electron-vite preview",
-    "dev": "electron-vite dev",
-    "build": "pnpm typecheck && electron-vite build",
-    "postinstall": "electron-builder install-app-deps",
+    "start": "electron-vite --config ./vite.electron.config.ts preview",
+    "dev": "electron-vite --config ./vite.electron.config.ts dev",
+    "build": "pnpm typecheck && electron-vite --config ./vite.electron.config.ts build",
+    "postinstall": "electron-builder install-app-deps && electron-rebuild --force --arch=x64 --version=41.0.2                  ",
     "build:win": "pnpm build && electron-builder --win --config",
     "build:mac": "pnpm build && electron-builder --mac --config",
     "build:linux": "pnpm build && electron-builder --linux --config"
   },
   "dependencies": {
-    "@electron-toolkit/preload": "^3.0.2",
     "@electron-toolkit/utils": "^4.0.0",
     "@pinia/colada": "^1.0.0",
+    "@vueuse/core": "catalog:",
     "color": "^5.0.3",
     "electron-updater": "^6.8.3",
     "ipc-call": "workspace:*",
-    "window-manager": "workspace:*"
+    "java-finder": "workspace:*",
+    "motion-v": "^2.0.0",
+    "window-manager": "workspace:*",
+    "zod": "^4.3.6",
+    "zod-electron-store": "catalog:"
   },
   "devDependencies": {
     "@electron-toolkit/tsconfig": "catalog:",
@@ -34,6 +38,8 @@
     "@vitejs/plugin-vue-jsx": "^5.1.5",
     "electron": "catalog:",
     "electron-builder": "^26.8.2",
+    "electron-devtools-installer": "^4.0.0",
+    "electron-rebuild": "^3.2.9",
     "electron-vite": "catalog:",
     "lightningcss": "^1.32.0",
     "naive-ui": "^2.44.1",

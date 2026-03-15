@@ -1,7 +1,5 @@
 import { PiniaColada } from '@pinia/colada'
 import { useDark, usePreferredDark } from '@vueuse/core'
-
-import '@/index.css'
 import Color from 'color'
 import {
   NConfigProvider,
@@ -25,8 +23,9 @@ const app = createApp(
     const isUseDarkMode = useDark({ listenToStorageChanges: false })
     watch(isDark, isDark => (isUseDarkMode.value = isDark), { immediate: true })
 
-    const themeColor = Color('#0087bd').hex()
-    const themeColorDark = Color(themeColor).darken(0.2).hex()
+    const primaryColor = Color('#177cb0')
+    const primaryColorLighten = Color(primaryColor).lighten(0.2)
+    const primaryColorDarken = Color(primaryColor).darken(0.2)
 
     return () => (
       <NConfigProvider
@@ -35,18 +34,18 @@ const app = createApp(
         theme={isDark.value ? darkTheme : undefined}
         themeOverrides={{
           common: {
-            primaryColor: themeColor,
-            primaryColorHover: Color(themeColor).lighten(0.2).hex(),
-            primaryColorPressed: themeColorDark,
-            primaryColorSuppl: themeColorDark,
+            primaryColor: primaryColor.hex(),
+            primaryColorHover: primaryColorDarken.hex(),
+            primaryColorPressed: primaryColorLighten.hex(),
+            primaryColorSuppl: primaryColorLighten.hex(),
             cardColor: isDark.value ? '#17181a' : undefined
           }
         }}
       >
         <NGlobalStyle />
-        <NLoadingBarProvider container-class='z-200000'>
-          <NDialogProvider to='#popups'>
-            <NMessageProvider max={5} to='#messages'>
+        <NLoadingBarProvider>
+          <NDialogProvider>
+            <NMessageProvider>
               <App />
             </NMessageProvider>
           </NDialogProvider>
@@ -59,7 +58,6 @@ const app = createApp(
 app.use(createPinia())
 app.use(PiniaColada)
 
-// @ts-ignore
 app.use(DataLoaderPlugin, { router })
 app.use(router)
 

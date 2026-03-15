@@ -12,15 +12,39 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AnimatePresence: typeof import('motion-v')['AnimatePresence']
+    DeskBar: typeof import('./src/components/DeskBar.vue')['default']
+    Frame: typeof import('./src/components/Frame.vue')['default']
+    Motion: typeof import('motion-v')['Motion']
+    NButton: typeof import('naive-ui')['NButton']
+    NButtonGroup: typeof import('naive-ui')['NButtonGroup']
+    NIcon: typeof import('naive-ui')['NIcon']
+    NImage: typeof import('naive-ui')['NImage']
+    NLayout: typeof import('naive-ui')['NLayout']
+    NLayoutSider: typeof import('naive-ui')['NLayoutSider']
+    NMenu: typeof import('naive-ui')['NMenu']
+    PlayButton: typeof import('./src/components/PlayButton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Versions: typeof import('./src/components/Versions.vue')['default']
+    SideBar: typeof import('./src/components/SideBar.vue')['default']
   }
 }
 
 // For TSX support
 declare global {
+  const AnimatePresence: typeof import('motion-v')['AnimatePresence']
+  const DeskBar: typeof import('./src/components/DeskBar.vue')['default']
+  const Frame: typeof import('./src/components/Frame.vue')['default']
+  const Motion: typeof import('motion-v')['Motion']
+  const NButton: typeof import('naive-ui')['NButton']
+  const NButtonGroup: typeof import('naive-ui')['NButtonGroup']
+  const NIcon: typeof import('naive-ui')['NIcon']
+  const NImage: typeof import('naive-ui')['NImage']
+  const NLayout: typeof import('naive-ui')['NLayout']
+  const NLayoutSider: typeof import('naive-ui')['NLayoutSider']
+  const NMenu: typeof import('naive-ui')['NMenu']
+  const PlayButton: typeof import('./src/components/PlayButton.vue')['default']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
-  const Versions: typeof import('./src/components/Versions.vue')['default']
+  const SideBar: typeof import('./src/components/SideBar.vue')['default']
 }

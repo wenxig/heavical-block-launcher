@@ -1,5 +1,4 @@
-
-import { ipcRenderer } from 'electron/main'
+import { ipcRenderer } from 'electron'
 
 export const init = () =>
   ({

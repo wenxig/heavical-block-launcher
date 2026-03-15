@@ -15,6 +15,7 @@ oxfmt
 oxlint
 releaserc
 sdkman
+Sider
 tsgo
 tsgolint
 vueuse

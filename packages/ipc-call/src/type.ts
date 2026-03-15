@@ -1,4 +1,6 @@
-declare module 'window-manager' {
+import type {} from 'window-manager/preload'
+
+declare module 'window-manager/preload' {
   interface Inject {
     sharedValue: {
       sync(name: string, v: any): void

@@ -35,21 +35,15 @@ export namespace WindowManager {
       f(win)
     }
   }
-  export const alertMessage = <T extends keyof GlobalEvents>(
-    event: T,
-    ...args: GlobalEvents[T]
-  ) => {
-    each(win => win.webContents.send(event.toString(), ...args))
-  }
+  export const alertMessage =
+    <GlobalEvents extends Record<string, any[]>>() =>
+    <T extends keyof GlobalEvents>(event: T, ...args: GlobalEvents[T]) => {
+      each(win => win.webContents.send(event.toString(), ...args))
+    }
   let defaultConfig: BrowserWindowConstructorOptions = {
     title: '',
     center: true,
-    webPreferences: {
-      preload: path.join(import.meta.dirname, '../preload/index.mjs'),
-      sandbox: false,
-      spellcheck: false
-    },
-    autoHideMenuBar: true,
+    webPreferences: { sandbox: false, spellcheck: false },
     show: false
   }
   export const setDefault = (config: BrowserWindowConstructorOptions) =>

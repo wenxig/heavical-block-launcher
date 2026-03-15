@@ -1,34 +1,19 @@
-import url from 'url'
+import path from 'node:path'
+import url from 'node:url'
 
-import { electronApp, optimizer, platform, type Platform } from '@electron-toolkit/utils'
-import {
-  type WebContents,
-  Tray,
-  Menu,
-  type Privileges,
-  protocol,
-  app,
-  net,
-} from 'electron/main'
-import { RefValue, SharedValue } from 'ipc-call/main'
-declare module 'ipc-call/main' {
-  interface SharedValueType {
-    platform: Platform
-  }
-}
+import { electronApp, optimizer, platform } from '@electron-toolkit/utils'
+import { type WebContents, Tray, Menu, type Privileges, protocol, app, net } from 'electron/main'
+import { RefValue } from 'ipc-call/main'
+import { WindowManager } from 'window-manager'
 
 import macTrayIcon from '../../../resources/iconTemplate@2x.png?asset'
 import icon from '../../../resources/iconWhite.png?asset'
-import type { SharedValues } from '../../preload/ipc'
 import { injectToJSON } from '../helper/toJSON'
 import { useAppStore } from '../store/app'
 import { useAtomStore } from '../store/atom'
 
-export const alertMessage = <T extends string>(
-  win: WebContents,
-  event: T,
-  ...args: any[]
-) => win.send(event.toString(), ...args)
+export const alertMessage = <T extends string>(win: WebContents, event: T, ...args: any[]) =>
+  win.send(event.toString(), ...args)
 
 export class TrayMenu {
   public menu: RefValue<(Electron.MenuItemConstructorOptions | Electron.MenuItem)[]>
@@ -85,6 +70,10 @@ export const createInitAppDefault = (
 ) => {
   injectToJSON()
 
+  WindowManager.setDefault({
+    webPreferences: { preload: path.join(import.meta.dirname, '../preload/index.mjs') }
+  })
+
   console.log('[versions reporting]')
   for (const name in process.versions)
     if (Object.prototype.hasOwnProperty.call(process.versions, name))
@@ -115,17 +104,12 @@ export const createInitAppDefault = (
   process.chdir(appStore.root)
 
   Menu.setApplicationMenu(null)
-  return (trayMenu: TrayMenuConfig[] = []) => {
+  return (...trayMenu: TrayMenuConfig[]) => {
     apply()
-    new SharedValue<SharedValues, 'platform'>(
-      'platform',
-      platform.isLinux ? 'linux' : platform.isMacOS ? 'macos' : 'windows'
-    )
-    electronApp.setAppUserModelId(config.appId ?? 'com.wenxig.template')
+    electronApp.setAppUserModelId(config.appId ?? 'com.wenxig.heavical-block-launcher')
     app.on('browser-window-created', (_, window) => {
       optimizer.watchWindowShortcuts(window)
     })
-    app.dock?.hide()
     return trayMenu.map(tmConfig => new TrayMenu(tmConfig))
   }
 }

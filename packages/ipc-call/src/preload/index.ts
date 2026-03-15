@@ -1,9 +1,9 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { WindowManager, type Inject } from 'window-manager'
+import { init as wmInit, type Inject } from 'window-manager/preload'
 
 export const init = () => {
   const inject: Inject = {
-    ...WindowManager.init(),
+    ...wmInit(),
     sharedValue: {
       boot(name) {
         return ipcRenderer.sendSync(`_sync_value_${name}_boot_`)

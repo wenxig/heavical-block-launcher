@@ -8,13 +8,11 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs"
     },
     "./preload": {
       "types": "./dist/preload.d.mts",
-      "import": "./dist/preload.mjs",
-      "require": "./dist/preload.cjs"
+      "import": "./dist/preload.mjs"
     }
   },
   "dependencies": {

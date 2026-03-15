@@ -4,13 +4,16 @@
     "src/renderer/src/env.d.ts",
     "src/renderer/src/**/*",
     "src/renderer/src/**/*.vue",
-    "src/preload/*.d.ts"
+    "src/share/**/*"
   ],
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
     "noEmit": true,
-    "paths": { "@/*": ["src/renderer/src/*"] },
+    "paths": { "@/*": ["src/renderer/src/*"], "@s/*": ["src/share/*"] },
     "types": ["vite/client", "./typed-router.d.ts", "./src/renderer/components.d.ts"]
+  },
+  "vueCompilerOptions": {
+    "plugins": ["vue-router/volar/sfc-typed-router", "vue-router/volar/sfc-route-blocks"]
   }
 }

@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+@import 'tailwindcss';
+
+* {
+  user-select: none;
+
+  --p-color: var(--nui-primary-color);
+  --bg-color: color-mix(in oklab, var(--color-white) 30%, transparent);
+}
+
+html,
+body {
+  @apply static size-full overflow-hidden! bg-yellow-50/1!;
+}
+
+#app {
+  @apply static size-full overflow-hidden bg-white/5 **:select-none;
+}
+
+@utility app-region-auto {
+  app-region: drag;
+}
+
+@utility app-region-no {
+  app-region: no-drag;
+}
