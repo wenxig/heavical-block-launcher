@@ -1,0 +1,25 @@
+{
+  "name": "java-finder",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsdown -c ./tsdown.config.ts"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "peerDependencies": {
+    "electron": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsdown": "catalog:",
+    "zod": "^4.3.6"
+  },
+  "dependencies": {
+    "zod-electron-store": "catalog:"
+  }
+}
